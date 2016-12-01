@@ -1,0 +1,39 @@
+#!/bin/sh
+### BEGIN INIT INFO
+# Provides:          display
+# Required-Start:    $remote_fs $syslog
+# Required-Stop:     $remote_fs $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Start display
+# Description:       Start/stop display
+### END INIT INFO
+
+DESC="display  service"
+
+
+do_start()
+{
+   echo "Starting display"
+   /home/pi/display.py 2>&1 &
+}
+
+do_stop()
+{
+   echo "Stopping display"
+   PID=`ps auxwww | grep display.py | head -1 | awk '{print $2}'`
+   kill -9 $PID
+}
+
+case "$1" in
+   start)
+     do_start
+     ;;
+   stop)
+     do_stop
+     ;;
+   *)
+     echo "Usage : display start|stop"
+esac
+
+exit 0

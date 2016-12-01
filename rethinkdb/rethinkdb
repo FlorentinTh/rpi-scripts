@@ -1,0 +1,49 @@
+#!/bin/sh
+### BEGIN INIT INFO
+# Provides:          Rethinkdb
+# Required-Start:    $local_fs
+# Required-Stop:     $local_fs
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# X-Interactive:     false
+# Short-Description: Launch rethinkdb
+# Description:       Start/stop rethinkdb
+### END INIT INFO
+
+DESC="Rethinkdb service"
+NAME=rethinkdb
+PID=/var/run/rethinkdb.pid
+
+do_start()
+{
+   echo "Starting rethinkdb service"
+   rethinkdb --config-file /usr/local/etc/rethinkdb/config.conf > /var/log/rethinkdb.log 2>&1 &
+   echo $! > $PID
+}
+
+do_stop()
+{
+   echo "Stopping rethinkdb service"
+   if [ -e $PID ];
+   then
+      kill -9 `cat $PID`
+   fi
+}
+
+
+case "$1" in
+   start)
+     do_start
+     ;;
+   stop)
+     do_stop
+     ;;
+   restart)
+     do_stop
+     do_start
+     ;;
+   *)
+     echo "Usage : rethinkdb start|stop|restart"
+esac
+
+exit 0
