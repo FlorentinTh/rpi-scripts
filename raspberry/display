@@ -15,25 +15,15 @@ DESC="display  service"
 do_start()
 {
    echo "Starting display"
-   /home/pi/display.py 2>&1 &
-}
-
-do_stop()
-{
-   echo "Stopping display"
-   PID=`ps auxwww | grep display.py | head -1 | awk '{print $2}'`
-   kill -9 $PID
+   /home/pi/raspberry_utils/display.py 2>&1 &
 }
 
 case "$1" in
    start)
      do_start
      ;;
-   stop)
-     do_stop
-     ;;
    *)
-     echo "Usage : display start|stop"
+     echo "Usage : display start"
 esac
 
 exit 0

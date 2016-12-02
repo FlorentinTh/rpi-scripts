@@ -58,7 +58,7 @@ function write_conf_file() {
 
 write_conf_file
 
-runuser -l $SUDO_USER -c 'sudo cp $HOME/'"$service_filename"' /etc/init.d/'"$service_filename"
+runuser -l $SUDO_USER -c 'sudo cp $HOME/rethinkdb_utils/'"$service_filename"' /etc/init.d/'"$service_filename"
 
 chmod +x /etc/init.d/$service_filename
 
