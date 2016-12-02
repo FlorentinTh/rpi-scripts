@@ -15,6 +15,7 @@ function configure_hostname(){
         done
         sed -i '6s/.*/127.0.1.1\t'"$name"'/' /etc/hosts
         sed -i '1s/.*/'"$name"'/' /etc/hostname
+        /etc/init.d/hostname.sh
 }
 
 function change_user_passwd(){
