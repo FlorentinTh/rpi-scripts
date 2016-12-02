@@ -8,8 +8,6 @@ if [ $EUID -ne 0 ]; then
         exit 2
 fi
 
-apt-get update
-apt-get upgrade -y
 apt-get install -y build-essential tcl8.5
 
 cd /tmp

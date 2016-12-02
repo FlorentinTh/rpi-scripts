@@ -19,7 +19,7 @@ cd rethinkdb-2.3.5
 
 ./configure --allow-fetch
 make -j4 ALLOW_WARNINGS=1
-make install ALLOW_WARNINGS=1
+make -j4 install ALLOW_WARNINGS=1
 
 sed -i '16s/.*/CONF_SWAPSIZE=1024/' /etc/dphys-swapfile
 /etc/init.d/dphys-swapfile stop
