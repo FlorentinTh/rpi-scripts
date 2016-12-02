@@ -63,3 +63,5 @@ runuser -l $SUDO_USER -c 'sudo cp $HOME/rethinkdb_utils/'"$service_filename"' /e
 chmod +x /etc/init.d/$service_filename
 
 update-rc.d $service_filename defaults
+
+/etc/init.d/rethinkdb start
