@@ -23,6 +23,6 @@ make install
 cd utils
 ./install_server.sh
 
-sed -i ''"$line_number"'s/.*/0.0.0.0/' $conf_file_path
+sed -i ''"$line_number"'s/.*/bind 0.0.0.0/' $conf_file_path
 
 update-rc.d redis_6379 defaults
