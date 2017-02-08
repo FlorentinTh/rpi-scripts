@@ -37,14 +37,16 @@ function install_tools(){
 
 function setup_LCD(){
         echo "Setting up LCD"
-        runuser -l $SUDO_USER -c 'sudo cp $HOME/raspberry_utils/'"$service_filename"' /etc/init.d/'"$service_filename"
+        runuser -l $SUDO_USER -c 'sudo cp $HOME/utils/raspberry/'"$service_filename"' /etc/init.d/'"$service_filename"
         chmod +x /etc/init.d/$service_filename
         update-rc.d $service_filename defaults
 }
 
 text="
 1- Change hostname
-2- Full configuration
+2- Configure LCD screen
+3- Full configuration (no LCD screen)
+4- Full configuration (LCD screen)
 Choice [ENTER]: "
 
 while
@@ -54,7 +56,15 @@ do
                 1 )
                         configure_hostname
                         break;;
-                2 )
+                2 )     install_tools
+                        setup_LCD
+                        break;;
+                3 )
+                        configure_hostname
+                        change_user_passwd
+                        update
+                        break;;
+                4 )
                         configure_hostname
                         change_user_passwd
                         update

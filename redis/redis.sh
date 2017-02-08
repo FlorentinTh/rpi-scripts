@@ -1,3 +1,4 @@
+
 #!/bin/bash
 
 line_number=62
@@ -8,7 +9,11 @@ if [ $EUID -ne 0 ]; then
         exit 2
 fi
 
+echo "installing dependencies..."
+
 apt-get install -y build-essential tcl8.5
+
+echo "downloading redis..."
 
 cd /tmp
 wget http://download.redis.io/releases/redis-stable.tar.gz
@@ -16,9 +21,13 @@ tar xzf redis-stable.tar.gz
 
 cd redis-stable
 
+echo "start building source..."
+
 make -j4
 # make -j4 test
 make install
+
+echo "configuring redis server..."
 
 cd utils
 ./install_server.sh
@@ -26,3 +35,7 @@ cd utils
 sed -i ''"$line_number"'s/.*/bind 0.0.0.0/' $conf_file_path
 
 update-rc.d redis_6379 defaults
+
+echo "rebooting..."
+
+reboot

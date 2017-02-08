@@ -1,4 +1,3 @@
-#!/bin/sh
 ### BEGIN INIT INFO
 # Provides:          display
 # Required-Start:    $remote_fs $syslog
@@ -15,7 +14,7 @@ DESC="display  service"
 do_start()
 {
    echo "Starting display"
-   /home/pi/raspberry_utils/display.py 2>&1 &
+   /home/pi/utils/raspberry/display.py 2>&1 &
 }
 
 case "$1" in
